@@ -15,19 +15,19 @@
 [data name:"suiciderate" source:"Suicide only data.csv"/]
 [data name:"suicideavg" source:"average suicide rate.csv"/]
 [data name:"top10countries" source:"top10countries.csv"/]
+[data name:"agesuicide" source:"average age suicide rate.csv"/]
 
 Amount of people around the world died for many reasons like disease or accidents; however, suicide is also not a neglectable factor which contribute to the number of death. Whether the trend shows increase or decrease, in every year, almost 800,000 people around the world died by suicide.
 [aside]
   ###800,000
-  *800,000* is almost the eqaul number to the population of a country, `Guyana`.
+  *800,000* is almost the equal number to the population of a country, `Guyana`.
 [/aside]
 
-You may try to see a trend of the number of death by suicide in a world wide view, selecting a country or a region.
+You may try to see a trend of the number of death by suicide in a world-wide-view or selecting a country or a region.
 
 Choose your country:
 [var name:"selectVal" value:"World" /] [Select value:selectVal options:`["Afghanistan","Albania","Algeria","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia", "Cameroon","Canada","Central African Republic","Central Asia", "Chad", "Chile","China","Colombia","Comoros","Congo","Costa Rica","Cote d'Ivoire","Croatia","Cuba","Cyprus","Czech Republic","Democratic Republic of Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Asia", "Eastern Europe", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea","Estonia", "Ethiopia","Fiji","Finland","France","Gabon", "Gambia", "Georgia", "Germany","Ghana","Greece", "Guatemala","Guinea", "Guinea-Bissau","Guyana","Haiti","Honduras", "Hungary","Iceland","India", "Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan","Laos","Latvia","Lebanon", "Lesotho", "Liberia", "Libya", "Lithuania","Luxembourg","Macedonia", "Madagascar","Malawi", "Malaysia", "Maldives", "Mali",  "Malta","Mauritania","Mexico","Moldova","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal", "Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North America","North Korea","Norway","Pakistan", "Palestine", "Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Saudi Arabia","Senegal","Serbia","Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia","South Africa", "South Asia","South Korea", "South Sudan","Southeast Asia","Spain", "Sri Lanka","Sub-Saharan Africa", "Sudan",  "Suriname", "Swaziland","Sweden","Switzerland", "Syria", "Taiwan", "Tajikistan","Tanzania", "Thailand","Togo", "Trinidad and Tobago", "Tunisia","Turkey","Turkmenistan", "Uganda","Ukraine", "United Arab Emirates","United Kingdom","United States" ,"Uruguay" , "Uzbekistan" ,"Vanuatu", "Venezuela" ,"Vietnam","Western Europe","World","Yemen" ,"Zambia","Zimbabwe"]`  /]
 [derived name:"bycountries" value:`suiciderate.filter(c => c.Country == selectVal)`/]
-
 [IdyllVegaLite
   data:bycountries
   spec:`{
@@ -40,7 +40,8 @@ Choose your country:
 
 [br/]
 
-###Top ten country that shows high rate of suicide
+# *Body*
+###Top Ten Countries
 Annually, top 10 countries that show hight rate of suicide has been changed. 
 [var name:"yea" value:1990/]
 [br/]
@@ -64,14 +65,59 @@ Select the year:
 [br/]
 However, some of the countries had kept showing the high rate of suicide. Here are top 10 countries that show high average suicide rate during 1990~2017.
 [br/]
-[derived name:"avgtopcountries" value:`suicideavg.filter(c => c.rate > 3.15)`/]
-[Display variable:avgtopcountries /]
+Click the button and check which countries belong to the group.
+[br/]
+[var name:"started" value:false/]
+[Conditional if: `!started`]
+[button onClick:`started=true`]Click to see the top 10 countries and their rates![/button]
+[/Conditional]
+[Conditional if: `started`]
+  [derived name:"avgtopcountries" value:`suicideavg.filter(c => c.rate > 3.15)`/]
+  [IdyllVegaLite
+    data:avgtopcountries
+    spec:`{
+      mark: "bar",
+      encoding: {
+       x: {field:"countries", type:"nominal", axis: {title: "Average Top 10 Countries"}},
+       y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}, scale:{domain:[0, 15]}}
+     }
+    }`/]
+[br/]
+###Would Age Matter?
+[data name:"agesuicide" source:"average age suicide rate.csv"/]
+Choose your country:
+[var name:"selectcountr" value:"World" /] [Select value:selectcountr options:`["Afghanistan","Albania","Algeria","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia", "Cameroon","Canada","Central African Republic","Central Asia", "Chad", "Chile","China","Colombia","Comoros","Congo","Costa Rica","Cote d'Ivoire","Croatia","Cuba","Cyprus","Czech Republic","Democratic Republic of Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Asia", "Eastern Europe", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea","Estonia", "Ethiopia","Fiji","Finland","France","Gabon", "Gambia", "Georgia", "Germany","Ghana","Greece", "Guatemala","Guinea", "Guinea-Bissau","Guyana","Haiti","Honduras", "Hungary","Iceland","India", "Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan","Laos","Latvia","Lebanon", "Lesotho", "Liberia", "Libya", "Lithuania","Luxembourg","Macedonia", "Madagascar","Malawi", "Malaysia", "Maldives", "Mali",  "Malta","Mauritania","Mexico","Moldova","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal", "Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North America","North Korea","Norway","Pakistan", "Palestine", "Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Saudi Arabia","Senegal","Serbia","Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia","South Africa", "South Asia","South Korea", "South Sudan","Southeast Asia","Spain", "Sri Lanka","Sub-Saharan Africa", "Sudan",  "Suriname", "Swaziland","Sweden","Switzerland", "Syria", "Taiwan", "Tajikistan","Tanzania", "Thailand","Togo", "Trinidad and Tobago", "Tunisia","Turkey","Turkmenistan", "Uganda","Ukraine", "United Arab Emirates","United Kingdom","United States" ,"Uruguay" , "Uzbekistan" ,"Vanuatu", "Venezuela" ,"Vietnam","Western Europe","World","Yemen" ,"Zambia","Zimbabwe"]`  /]
+[derived name:"age" value:`agesuicide.filter(c => c.countries == selectcountr)`/]
+[br/]
+[var name:"radioVal" value:"Suicide rate per 100,000" /]
+[Radio value:radioVal options:`["Suicide rate per 100,000", "Proportion"]`  /]
+[br/]
+
+[Conditional if: `radioVal=="Suicide rate per 100,000"`]
 [IdyllVegaLite
-  data:avgtopcountries
+  data:age
   spec:`{
     mark: "bar",
     encoding: {
-      x: {field:"countries", type:"nominal", axis: {title: "Average Top 10 Countries"}},
-      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}, scale:{domain:[0, 15]}}
+      x: {field:"agegroup", type:"nominal", axis: {title: "Age Group"}},
+      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}}
     }
   }`/]
+[br/]
+[/Conditional]
+
+[Conditional if: `radioVal=="Proportion"`]
+[IdyllVegaLite
+  data:age
+  spec:`{
+    mark: "arc",
+    encoding: {
+      theta: {field:"prop", type:"quantitative"},
+      color: {field:"agegroup", type:"nominal"}
+    }
+  }`/]
+[/Conditional]
+
+  
+[/Conditional]
+
