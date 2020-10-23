@@ -29,6 +29,7 @@
 [data name:"suicideavg" source:"average suicide rate.csv"/]
 [data name:"top10countries" source:"top10countries.csv"/]
 [data name:"agesuicide" source:"average age suicide rate.csv"/]
+[data name:"gender" source:"gendersuicide.csv"/]
 
 [div style: `{fontSize: '3vh'}`] 
 ### We are going to talk about suicide. 
@@ -169,7 +170,7 @@ Choose your country:
 
 [var name:"myVar" value:false /]
 [Boolean value:myVar /]
-View the summary of each agegroup(Boxplot)
+*View the summary of each agegroup(Boxplot)*
 [Conditional if: `myVar`]
 [IdyllVegaLite
   data:agesuicide
@@ -187,5 +188,59 @@ View the summary of each agegroup(Boxplot)
 [br/]
 From the graphs, we noticed the people who is older than 70 tend to commit suicide more through out whole nations. On the other hand, the age group 5~14 is the group that shows the least suicide rate.
 However, the result can be differed by a country and a region.
+[br/]
+
+###Would Gender Matter?
+The next feature of demogrpahic approach is gender.
+[br/]
+
+Can you guess which gender commit suicide more:
+[br/]
+Male or Female?
+[var name:"textVal" value:"" /]
+[TextInput value:textVal /]
+[br/]
+[Conditional if: `textVal=="Male"||textVal=="male"`]
+[br/]
+*Correct!*
+[br/]
+[IdyllVegaLite
+  data:gender
+  spec:`{
+    width:300,
+    height:300,
+    mark: "boxplot",
+    encoding: {
+      x: {field:"gender", type:"nominal", axis: {title: "Gender"}},
+      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}}
+    }
+  }`/]
+[br/]
+You can check it out by country or region.
+[br/]
+Choose your country:
+[var name:"selectc" value:"World" /] [Select value:selectc options:`["Afghanistan","Albania","Algeria","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia", "Cameroon","Canada","Central African Republic","Central Asia", "Chad", "Chile","China","Colombia","Comoros","Congo","Costa Rica","Cote d'Ivoire","Croatia","Cuba","Cyprus","Czech Republic","Democratic Republic of Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Asia", "Eastern Europe", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea","Estonia", "Ethiopia","Fiji","Finland","France","Gabon", "Gambia", "Georgia", "Germany","Ghana","Greece", "Guatemala","Guinea", "Guinea-Bissau","Guyana","Haiti","Honduras", "Hungary","Iceland","India", "Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan","Laos","Latvia","Lebanon", "Lesotho", "Liberia", "Libya", "Lithuania","Luxembourg","Macedonia", "Madagascar","Malawi", "Malaysia", "Maldives", "Mali",  "Malta","Mauritania","Mexico","Moldova","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal", "Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North America","North Korea","Norway","Pakistan", "Palestine", "Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Saudi Arabia","Senegal","Serbia","Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia","South Africa", "South Asia","South Korea", "South Sudan","Southeast Asia","Spain", "Sri Lanka","Sub-Saharan Africa", "Sudan",  "Suriname", "Swaziland","Sweden","Switzerland", "Syria", "Taiwan", "Tajikistan","Tanzania", "Thailand","Togo", "Trinidad and Tobago", "Tunisia","Turkey","Turkmenistan", "Uganda","Ukraine", "United Arab Emirates","United Kingdom","United States" ,"Uruguay" , "Uzbekistan" ,"Vanuatu", "Venezuela" ,"Vietnam","Western Europe","World","Yemen" ,"Zambia","Zimbabwe"]`  /]
+[derived name:"gend" value:`gender.filter(c => c.countries == selectc)`/]
+[IdyllVegaLite
+  data:gend
+  spec:`{
+    width:300,
+    height:300,
+    mark: "bar",
+    encoding: {
+      x: {field:"gender", type:"nominal", axis: {title: "Gender"}},
+      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}}
+    }
+  }`/]
+[br/]
+From the boxplot and the bargraph, we can easily figured out males commit suicide more than females do.
+[/Conditional]
+[Conditional if: `textVal=="Female"||textVal=="female"`]
+[br/]
+*Try Again!*
+[br/]
+[/Conditional]
+
+
 [/Conditional]
 
