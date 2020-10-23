@@ -97,7 +97,7 @@ From the result we can find `Greenland` shows the highest suicide rate and `Guam
 [br/]
 ###Would Age Matter?
 Suicide is all about human beings. For this reason, demogrpahic approach is the basic but necessary process to get a good point of view. First of all, we explore our data with subject's age.
-
+You can select a country you would like to investigate in. If you want, compare it with the summary of the data(Boxplot). 
 [br/]
 [data name:"agesuicide" source:"average age suicide rate.csv"/]
 Choose your country:
@@ -112,8 +112,8 @@ Choose your country:
 [IdyllVegaLite
   data:age
   spec:`{
-    width:500,
-    height:500,
+    width:300,
+    height:300,
     mark: "bar",
     encoding: {
       x: {field:"agegroup", type:"nominal", axis: {title: "Age Group"}},
@@ -127,8 +127,8 @@ Choose your country:
 [IdyllVegaLite
   data:age
   spec:`{
-    width:500,
-    height:500,
+    width:300,
+    height:300,
     mark: "arc",
     encoding: {
       theta: {field:"prop", type:"quantitative"},
@@ -136,7 +136,26 @@ Choose your country:
     }
   }`/]
 [/Conditional]
-From the pie chart and bar graph, we noticed the people who is older than 70 tend to commit suicide more through out whole nations. On the other hand, the age group 5~14 is the group that shows the least suicide rate.
-However, the result can be differed by a country and a region.  
+
+[var name:"myVar" value:false /]
+[Boolean value:myVar /]
+View the summary of each agegroup(Boxplot)
+[Conditional if: `myVar`]
+[IdyllVegaLite
+  data:agesuicide
+  spec:`{
+    width:300,
+    height:300,
+    mark: "boxplot",
+    encoding: {
+      x: {field:"agegroup", type:"nominal", axis: {title: "Age Group"}},
+      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}}
+    }
+  }`/]
+[/Conditional]
+
+[br/]
+From the graphs, we noticed the people who is older than 70 tend to commit suicide more through out whole nations. On the other hand, the age group 5~14 is the group that shows the least suicide rate.
+However, the result can be differed by a country and a region.
 [/Conditional]
 
