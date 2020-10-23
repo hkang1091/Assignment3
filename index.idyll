@@ -127,7 +127,7 @@ From the result, we find `Greenland` shows the highest suicide rate, and `Guam`,
 
 [br/]
 ###Would Age Matter?
-Suicide is all about human beings. For this reason, demogrpahic approach is the basic but necessary process to get a good point of view. First of all, we explore our data with subject's age.
+Suicide is all about humans behavior. For this reason, demographic approach is the basic but necessary process to get a good point of view. First of all, we explore our data with subject's age.
 You can select a country you would like to investigate in. If you want, compare it with the summary of the data(Boxplot). 
 [br/]
 [data name:"agesuicide" source:"average age suicide rate.csv"/]
@@ -148,7 +148,7 @@ Choose your country:
     mark: "bar",
     encoding: {
       x: {field:"agegroup", type:"nominal", axis: {title: "Age Group"}},
-      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}}
+      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}, scale:{domain:[0,110]}}
     }
   }`/]
 [br/]
@@ -218,7 +218,7 @@ Male or Female?
     }
   }`/]
 [br/]
-You can check it out by country or region.
+You can check it by a country or a region.
 [br/]
 Choose your country:
 [var name:"selectc" value:"World" /] [Select value:selectc options:`["Afghanistan","Albania","Algeria","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia", "Cameroon","Canada","Central African Republic","Central Asia", "Chad", "Chile","China","Colombia","Comoros","Congo","Costa Rica","Cote d'Ivoire","Croatia","Cuba","Cyprus","Czech Republic","Democratic Republic of Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Asia", "Eastern Europe", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea","Estonia", "Ethiopia","Fiji","Finland","France","Gabon", "Gambia", "Georgia", "Germany","Ghana","Greece", "Guatemala","Guinea", "Guinea-Bissau","Guyana","Haiti","Honduras", "Hungary","Iceland","India", "Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan","Laos","Latvia","Lebanon", "Lesotho", "Liberia", "Libya", "Lithuania","Luxembourg","Macedonia", "Madagascar","Malawi", "Malaysia", "Maldives", "Mali",  "Malta","Mauritania","Mexico","Moldova","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal", "Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North America","North Korea","Norway","Pakistan", "Palestine", "Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Saudi Arabia","Senegal","Serbia","Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia","South Africa", "South Asia","South Korea", "South Sudan","Southeast Asia","Spain", "Sri Lanka","Sub-Saharan Africa", "Sudan",  "Suriname", "Swaziland","Sweden","Switzerland", "Syria", "Taiwan", "Tajikistan","Tanzania", "Thailand","Togo", "Trinidad and Tobago", "Tunisia","Turkey","Turkmenistan", "Uganda","Ukraine", "United Arab Emirates","United Kingdom","United States" ,"Uruguay" , "Uzbekistan" ,"Vanuatu", "Venezuela" ,"Vietnam","Western Europe","World","Yemen" ,"Zambia","Zimbabwe"]`  /]
@@ -231,7 +231,7 @@ Choose your country:
     mark: "bar",
     encoding: {
       x: {field:"gender", type:"nominal", axis: {title: "Gender"}},
-      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}}
+      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}, scale:{domain:[0,110]}}
     }
   }`/]
 [br/]
