@@ -121,9 +121,9 @@ Here are top 10 countries that show high average suicide rate during 1990~2017.
        y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}, scale:{domain:[0, 15]}}
      }
     }`/]
-[br/]
-
 From the result, we find `Greenland` shows the highest suicide rate, and `Guam`, `Guyana`, `Kazakhstan`, `Lithuania`,`Northern Mariana Islands`,`Qatar`,`South Korea`,`Sri Lanka` and `Suriname` belong to the top 10 countries
+[/Conditional]
+[br/]
 
 [br/]
 ###Would Age Matter?
@@ -239,10 +239,42 @@ From the boxplot and the bargraph, we can easily figured out males commit suicid
 [/Conditional]
 [Conditional if: `textVal=="Female"||textVal=="female"`]
 [br/]
-*Try Again!*
+*Incorrect!*
 [br/]
+[br/]
+[br/]
+[IdyllVegaLite
+  data:gender
+  spec:`{
+    width:300,
+    height:300,
+    mark: "boxplot",
+    encoding: {
+      x: {field:"gender", type:"nominal", axis: {title: "Gender"}},
+      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}}
+    }
+  }`/]
+[br/]
+You can check it by a country or a region.
+[br/]
+Choose your country:
+[var name:"selectc" value:"World" /] [Select value:selectc options:`["Afghanistan","Albania","Algeria","Angola","Antigua and Barbuda","Argentina","Armenia","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bhutan","Bolivia","Botswana","Brazil","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia", "Cameroon","Canada","Central African Republic","Central Asia", "Chad", "Chile","China","Colombia","Comoros","Congo","Costa Rica","Cote d'Ivoire","Croatia","Cuba","Cyprus","Czech Republic","Democratic Republic of Congo", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "East Asia", "Eastern Europe", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea","Estonia", "Ethiopia","Fiji","Finland","France","Gabon", "Gambia", "Georgia", "Germany","Ghana","Greece", "Guatemala","Guinea", "Guinea-Bissau","Guyana","Haiti","Honduras", "Hungary","Iceland","India", "Indonesia","Iran","Iraq","Ireland","Israel","Italy","Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kuwait", "Kyrgyzstan","Laos","Latvia","Lebanon", "Lesotho", "Liberia", "Libya", "Lithuania","Luxembourg","Macedonia", "Madagascar","Malawi", "Malaysia", "Maldives", "Mali",  "Malta","Mauritania","Mexico","Moldova","Montenegro","Morocco","Mozambique","Myanmar","Namibia","Nepal", "Netherlands","New Zealand","Nicaragua","Niger","Nigeria","North America","North Korea","Norway","Pakistan", "Palestine", "Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Qatar","Romania","Russia","Rwanda","Saint Lucia","Saudi Arabia","Senegal","Serbia","Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia","South Africa", "South Asia","South Korea", "South Sudan","Southeast Asia","Spain", "Sri Lanka","Sub-Saharan Africa", "Sudan",  "Suriname", "Swaziland","Sweden","Switzerland", "Syria", "Taiwan", "Tajikistan","Tanzania", "Thailand","Togo", "Trinidad and Tobago", "Tunisia","Turkey","Turkmenistan", "Uganda","Ukraine", "United Arab Emirates","United Kingdom","United States" ,"Uruguay" , "Uzbekistan" ,"Vanuatu", "Venezuela" ,"Vietnam","Western Europe","World","Yemen" ,"Zambia","Zimbabwe"]`  /]
+[derived name:"gend" value:`gender.filter(c => c.countries == selectc)`/]
+[IdyllVegaLite
+  data:gend
+  spec:`{
+    width:300,
+    height:300,
+    mark: "bar",
+    encoding: {
+      x: {field:"gender", type:"nominal", axis: {title: "Gender"}},
+      y: {field:"rate", type:"quantitative", axis: {title: "Suicide rate per 100,000"}, scale:{domain:[0,110]}}
+    }
+  }`/]
+[br/]
+From the boxplot and the bargraph, we can easily figured out males commit suicide more than females do.
 [/Conditional]
 
 
-[/Conditional]
+
 
